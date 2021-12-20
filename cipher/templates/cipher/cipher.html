@@ -1,0 +1,41 @@
+<script>
+    function check(x) {
+        if (x.selectedIndex==0) {
+            document.getElementById("submitButton").style.display = 'none';
+        } else {
+            document.getElementById("submitButton").style.display = 'block';
+        
+        }
+        if (x.selectedIndex==1) { //shift 
+            document.getElementById("shift-select").style.display = 'block';
+        } else {
+            document.getElementById("shift-select").style.display = 'none';
+        }
+        if (x.selectedIndex==2) { //rmap 
+            document.getElementById("rmap-select").style.display = 'block';
+        } else {
+            document.getElementById("rmap-select").style.display = 'none';
+        }
+    }
+</script>
+
+<div class="form">
+    <form action="{% url 'result' %}">
+        <input type="text" id="plaintext" name="plaintext"><br>
+        <label for="type">Select a cipher:</label>
+        <select name="type" onChange="check(this);">
+           <option selected disabled>Select a cipher type</option>    
+           <option value="shift">Shift by n</option>
+           <option value="rmap">Random map</option>
+        </select><br>
+        <div id="shift-select" style="display:none;">
+            <label>Shift by how many?</label>
+        <input type="number" id="shiftby" name="shiftby">
+        </div>
+        <div id="rmap-select" style="display:none;">
+            <label>Enter a random seed (leave blank to use system time)</label>
+        <input type="text" id="rseed" name="rseed">
+        </div>
+        <input type="submit" id="submitButton" value="Cipherify" style="display:none;">
+    </form>
+</div>
