@@ -6,4 +6,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('cipher/', views.cipher, name='cipher'),
+    path('result/', views.result, name='result'),
 ]

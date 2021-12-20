@@ -7,6 +7,9 @@ def home(request):
     return render(request, 'cipher/home.html')
 
 def cipher(request):
+    return render(request, 'cipher/cipher.html')
+
+def result(request):
     ptext = request.GET.get('plaintext').upper()
     ctype = request.GET.get('type')
 
@@ -25,7 +28,7 @@ def cipher(request):
                 shifted = (shifted % 90) + 65
             shifted = chr(shifted)
             ciphered += shifted
-        return render(request, 'cipher/cipher.html', {'plaintext':ptext, 'ciphered':ciphered})
+        return render(request, 'cipher/result.html', {'plaintext':ptext, 'ciphered':ciphered})
 
     if (ctype == 'rmap'): # Maps each character to a different, randomly chosen character
         rseed = request.GET.get('rseed')
@@ -51,8 +54,8 @@ def cipher(request):
         key = str(key)
         rseed = str(rseed)
         mapkey = 'The key is as follows:\n' + '\n' + key
-        return render(request, 'cipher/cipher.html', {'plaintext':ptext, 'ciphered':ciphered, 'mapkey':mapkey})
+        return render(request, 'cipher/result.html', {'plaintext':ptext, 'ciphered':ciphered, 'mapkey':mapkey})
 
-    return render(request, 'cipher/cipher.html', {'plaintext':ptext})
+    return render(request, 'cipher/result.html', {'plaintext':ptext})
     
 
