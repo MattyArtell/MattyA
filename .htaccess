@@ -1,5 +1,6 @@
 AddHandler cgi-script .fcgi
 RewriteEngine on
+RewriteRule /static/ /kunden/homepages/45/d895236634/htdocs/MattyA/static/
 RewriteBase /
 # The following two lines are for FastCGI:
 RewriteCond %{REQUEST_FILENAME} !-f

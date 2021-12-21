@@ -25,7 +25,7 @@ basepath = '/homepages/45/d895236634/htdocs'
 SECRET_KEY = 'django-insecure-bwt-@7qlot25a%3d10z_n8ao81ii24gmf1zj3zntg$foijclkn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['mattya.co.uk', 'localhost']
 
@@ -120,13 +120,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_ROOT = '/homepages/45/d895236634/htdocs/MattyA/static'
+STATIC_URL = '/MattyA/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-STATIC_ROOT = basepath + '/MattyA/static'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static/'),
-]
+
