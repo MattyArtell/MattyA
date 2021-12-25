@@ -25,7 +25,7 @@ basepath = '/homepages/45/d895236634/htdocs'
 SECRET_KEY = 'django-insecure-bwt-@7qlot25a%3d10z_n8ao81ii24gmf1zj3zntg$foijclkn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['mattya.co.uk', 'localhost']
 
