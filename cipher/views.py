@@ -45,6 +45,7 @@ def result(request):
     alphabet2 = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
     ciphered = ''
     adict = {}
+    showtr = False
 
     if (ctype == 'shift'): # Shifts all characters in the plaintext by shiftby characters
         shiftby = int(request.GET.get('shiftby'))
@@ -98,25 +99,37 @@ def result(request):
         return render(request, 'cipher/result.html', {'plaintext':ptext, 'ciphered':ciphered, 'mapkey':map})
 
 
-    if (ctype == 'vigenere'):
+    if (ctype == 'vigenere'): #this does not work with spaces etc.
         keyword = request.GET.get('keywordin').upper()
-        if (len(keyword) < len(ptext)):
+        keywordconst = request.GET.get('keywordin').upper()
+
+        #remove all non-letters from keyword
+        for i in range(len(keywordconst)):            
+            if not (65<=ord(keywordconst[i])<=90):
+                keyword = keyword.replace(keywordconst[i], "")
+
+        if (len(keyword) < len(ptext)): #repeats keyword to be as long as ptext            
             current = 0
             while(len(keyword) < len(ptext)):                
                 keyword += keyword[current]                
                 current += 1
-                if (current > len(keyword)):
-                    current = 0
-        elif (len(keyword) > len(ptext)):
+
+        elif (len(keyword) > len(ptext)): #trims keyword to be as long as ptext
             keyword = keyword[:len(ptext)]
 
+        keyworddisplay = keyword #variable for display before we add spaces to keyword
+
         for i in range(len(ptext)):
+            if not (65<=ord(ptext[i])<=90):
+                ciphered+=ptext[i] #the problem is, we will now be using the wrong keyletter
+                keyword = keyword[:i] + " " + keyword[i:] #add a space to the keyword at position i to account for this
+                continue
             keyletter = ord(keyword[i])
             ptextletter = ord(ptext[i])
             cipheredletter = (keyletter + ptextletter)%26
             ciphered += chr(cipheredletter+65)
 
-        return render(request, 'cipher/result.html', {'plaintext':ptext, 'ciphered':ciphered, 'mapkey':keyword, 'showtr':True})
+        return render(request, 'cipher/result.html', {'plaintext':ptext, 'ciphered':ciphered, 'mapkey':keyworddisplay, 'showtr':True})
       
     return render(request, 'cipher/result.html', {'plaintext':ptext})
     
