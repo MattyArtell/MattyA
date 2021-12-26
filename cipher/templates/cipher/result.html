@@ -1,12 +1,20 @@
-<div>Your plaintext was: <h1>{{plaintext}}</h1></div>
+{% extends 'cipher/base.html' %}
 
-<div>Your ciphertext is: <h1>{{ciphered}}</h1></div>
+{% block content %}
+    
+<div class="col justify-content-center text-center">
+<div>Your plaintext was: <h1>{{plaintext}}</h1></div><br>
+
+<div>Your ciphertext is: <h1>{{ciphered}}</h1></div><br>
 
 {% if mapkey %}
-    The key is {{mapkey}}<br>
+    The key is: <h4>{{mapkey}}</h4><br>
 {% endif %}
 
 {% if showtr == "True" %}
     <br><img src="/static/images/tr.png" alt="Tabula recta"><br>
     To encrypt each letter, follow the row corresponding to the key letter and the column corresponding to the plaintext letter
 {% endif %}
+</div>
+
+{% endblock %}

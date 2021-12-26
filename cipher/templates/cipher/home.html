@@ -1,5 +1,8 @@
-HELLO THIS IS MY HOME PAGE <br>
+{% extends 'cipher/base.html' %}
+{% block content %}
+<h1>HELLO THIS IS MY HOME PAGE </h1><br>
 {% load static %}
 <img src="/static/gifs/under-construction.gif" alt="very important gif 1"><br>
 <a href="{% url 'cipher' %}"><img src="/static/images/cypher.jpg/" alt="cipher"></img></a><br>
 <img src="/static/gifs/dancingbaby.gif" alt="very important gif 2"><br>
+{% endblock %}

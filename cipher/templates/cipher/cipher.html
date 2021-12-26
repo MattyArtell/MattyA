@@ -1,3 +1,7 @@
+{% extends 'cipher/base.html' %}
+
+{% block content %}
+
 <script>    
     function check(x) {//function for hiding options until they are needed
         if (x.selectedIndex==0) {
@@ -33,12 +37,12 @@
     }
 </script>
 
-<div class="form">
+<div class="d-flex justify-content-center text-center">
     <form action="{% url 'result' %}">
-        <label>Plaintext:</label>
+        <h1><label>Plaintext:</label></h1>
         <input type="text" id="plaintext" name="plaintext"><br>
 
-        <label for="type">Select a cipher:</label>
+        <h4><label for="type">Select a cipher:</label></h2>
 
         <select name="type" onChange="check(this);">
            <option selected disabled>Select a cipher type</option>    
@@ -50,17 +54,17 @@
         </select><br>
 
         <div id="shift-select" style="display:none;">
-            <label>Shift by how many?</label>
+            <h4><label>Shift by how many?</label></h4>
         <input type="number" id="shiftby" name="shiftby">
         </div>
 
         <div id="rmap-select" style="display:none;">
-            <label>Enter a random seed (leave blank to use system time)</label>
+            <h4><label>Enter a random seed:</label></h4>
         <input type="text" id="rseed" name="rseed">
         </div>
 
         <div id="mapselect" style="display:none;">
-            <label>Enter a map</label><br>
+            <h4><label>Enter a map</label></h4>
         <input type="text" id="maptext" name="maptext" size="40"><br>
         <input type="text" id="alphabet" value="ABCDEFGHIJKLMNOPQRSTUVWXYZ" name="alphabet" disabled size="40">
 
@@ -69,15 +73,15 @@
         </div>
 
         <div id="keyword" style="display:none;">
-            <label>What is your keyword?</label>
+            <h4><label>What is your keyword?</label></h4>
         <input type="text" id="keywordin" name="keywordin">
-        </div>
+        </div><br>
 
 
-        <input type="submit" id="submitButton" value="Cipherify" style="display:none;">
+        <input type="submit" id="submitButton" value="Cipherify" style="display:none" class="btn btn-primary btn-sm">
     </form>
 </div>
-
-<div class="grid-container">
-    
+   
 </div>
+
+{% endblock %}

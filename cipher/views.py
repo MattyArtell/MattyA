@@ -70,6 +70,14 @@ def result(request):
         return render(request, 'cipher/result.html', {'plaintext':ptext, 'ciphered':ciphered, 'mapkey':mapkey})
 
     if (ctype == 'smap'): # Maps each character to a user-specified character
+        
+        #
+
+        # Need to modify to give error if blank
+
+        #
+
+
         map = request.GET.get('maptext')
         alphabet2 = list(map)
         for i in range(len(alphabet)):
