@@ -1,8 +1,32 @@
 {% extends 'cipher/base.html' %}
-{% block content %}
-<h1>HELLO THIS IS MY HOME PAGE </h1><br>
 {% load static %}
-<img src="/static/gifs/under-construction.gif" alt="very important gif 1"><br>
-<a href="{% url 'cipher' %}"><img src="/static/images/cypher.jpg/" alt="cipher"></img></a><br>
-<img src="/static/gifs/dancingbaby.gif" alt="very important gif 2"><br>
+{% block content %}
+
+<div class="text-center"><h1>Matty Artell's homepage </h1><br></div>
+
+<div class="py-5 bg-light text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top" style="height: 329px; width: 100%; display: block;" src="/static/images/cipher.png" alt="Cipher preview">
+                    <a href="{% url 'cipher' %}">/cipher/ - A tool for enciphering plaintext</a>
+                </div>
+              </div>
+            <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top" style="height: 329px; width: 100%; display: block;" src="/static/images/cipher.png" alt="Cipher preview">
+                  Placeholder 1
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top" style="height: 329px; width: 100%; display: block;"src="/static/images/cipher.png" alt="Cipher preview">
+                  Placeholder 2
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
