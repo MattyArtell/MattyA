@@ -3,6 +3,6 @@ from . import views
 
 app_name='cipher'
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('cipher/', views.cipher, name='cipher'),
+    path('', views.cipher, name='cipher'),
+    path('result/', views.result, name='result')
 ]

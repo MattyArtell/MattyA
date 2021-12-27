@@ -5,8 +5,12 @@ import random
 
 def ciphermap(adict, ptext): #given a dictionary which assigns each letter in the alphabet to another letter, returns the ciphertext
     ciphered=''
+    print(adict)
     for i in range(len(ptext)):
             if not (65<=ord(ptext[i])<=90):
+                ciphered+=ptext[i]
+                continue
+            if not (adict.get(ptext[i])):
                 ciphered+=ptext[i]
                 continue              
             ciphered+=adict.get(ptext[i])
@@ -32,8 +36,7 @@ def alphashift(input, n): #shifts all characters in a string by n characters
             ciphered += shifted
     return(ciphered)
 
-def home(request):
-    return render(request, 'cipher/home.html')
+
 
 def cipher(request):
     return render(request, 'cipher/cipher.html')
@@ -70,15 +73,13 @@ def result(request):
         return render(request, 'cipher/result.html', {'plaintext':ptext, 'ciphered':ciphered, 'mapkey':mapkey})
 
     if (ctype == 'smap'): # Maps each character to a user-specified character
-        
-        #
-
-        # Need to modify to give error if blank
-
-        #
-
-
-        map = request.GET.get('maptext')
+        map = request.GET.get('maptext').upper()
+        alphabet = request.GET.get('alphabet').upper()
+        if(map == "" or alphabet == ""):
+            return render(request, 'cipher/cipher.html', {'error':"Cipher letters and/or alphabet letters cannot be blank!"})
+        elif(len(map)!=len(alphabet)):
+            return render(request, 'cipher/cipher.html', {'error':"Map letters and alphabet letters must be the same length!"})
+        alphabet = list(alphabet)
         alphabet2 = list(map)
         for i in range(len(alphabet)):
             adict.update({alphabet[i]:alphabet2[i]})
@@ -103,14 +104,20 @@ def result(request):
             adict.update({map[i]:alphabet[i]})
 
         ciphered = ciphermap(adict,ptext)
-
+        map = ''.join(map)
         return render(request, 'cipher/result.html', {'plaintext':ptext, 'ciphered':ciphered, 'mapkey':map})
 
 
     if (ctype == 'vigenere'): #this does not work with spaces etc.
+
+        
+
         keyword = request.GET.get('keywordin').upper()
         keywordconst = request.GET.get('keywordin').upper()
 
+        if(keyword == ""):
+            return render(request, 'cipher/cipher.html', {'error':"Keyword cannot be blank"})
+        
         #remove all non-letters from keyword
         for i in range(len(keywordconst)):            
             if not (65<=ord(keywordconst[i])<=90):

@@ -1,4 +1,4 @@
-{% extends 'cipher/base.html' %}
+{% extends 'MattyA/base.html' %}
 {% load static %}
 {% block content %}
 
@@ -9,19 +9,19 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="card mb-4 box-shadow">
-                    <img class="card-img-top" style="height: 329px; width: 100%; display: block;" src="/static/images/cipher.png" alt="Cipher preview">
-                    <a href="{% url 'cipher' %}">/cipher/ - A tool for enciphering plaintext</a>
+                    <img class="card-img-top" src="/static/images/cipher.png" alt="Cipher preview">
+                    <a href="{% url 'cipher:cipher' %}">/cipher/ - A tool for enciphering plaintext</a>
                 </div>
               </div>
             <div class="col-md-4">
                 <div class="card mb-4 box-shadow">
-                    <img class="card-img-top" style="height: 329px; width: 100%; display: block;" src="/static/images/cipher.png" alt="Cipher preview">
-                  Placeholder 1
+                    <img class="card-img-top" src="/static/images/qwyf.jpg" alt="Cipher preview">
+                  <a href="{% url 'quiz:quiz' %}">/quiz/ - Quiz With Your Friends</a>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="card mb-4 box-shadow">
-                    <img class="card-img-top" style="height: 329px; width: 100%; display: block;"src="/static/images/cipher.png" alt="Cipher preview">
+                    <img class="card-img-top" src="/static/images/cipher.png" alt="Cipher preview">
                   Placeholder 2
                 </div>
               </div>
