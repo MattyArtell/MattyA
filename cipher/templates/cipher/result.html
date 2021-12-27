@@ -1,4 +1,4 @@
-{% extends 'cipher/base.html' %}
+{% extends 'MattyA/base.html' %}
 
 {% block content %}
     
@@ -11,9 +11,9 @@
     The key is: <h4>{{mapkey}}</h4><br>
 {% endif %}
 
-{% if showtr == "True" %}
+{% if showtr %}
     <br><img src="/static/images/tr.png" alt="Tabula recta"><br>
-    To encrypt each letter, follow the row corresponding to the key letter and the column corresponding to the plaintext letter
+    To encrypt each letter of the plaintext, follow the row corresponding to the key letter and the column corresponding to the plaintext letter
 {% endif %}
 </div>
 
