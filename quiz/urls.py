@@ -6,4 +6,5 @@ urlpatterns = [
     path('', views.quiz, name='quiz'),
     path('create', views.create, name='create'),
     path('join', views.join, name='join'),
+    path('room/<uid>/', views.currentroom, name='currentroom')
 ]
