@@ -11,15 +11,31 @@
 
 			<div class="d-flex flex-row navbar-nav">
 			  <li class="nav-item">
-				<a href="{% url 'home' %}"><button type="button" class="btn btn-primary btn-sm px-2 me-md-2 fw-bold mx-2">Home</button></a>
+				<a href="{% url 'home' %}"><button type="button" class="btn btn-info btn-sm px-2 me-md-2 fw-bold mx-2">Home</button></a>
 			  </li>
-              <li class="nav-item btn-outline-secondary btn-sm px-2 mx-2">Matty Artell</li>
+        {% if user.is_authenticated %}
+
+          <li class="nav-item btn-outline-secondary btn-sm px-2 mx-2">Logged in as {{ user.username }}</li>
+          
+          <li><form action="{% url 'logoutuser' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary btn-sm px-2 me-md-2 fw-bold mx-2">Logout</button>
+          </form></li>
+          
+          {% else %}
+          
+          <li><a href="{% url 'signupuser' %}"><button class="btn btn-primary btn-sm px-2 me-md-2 fw-bold mx-2">Sign Up</button></a></li>
+          <li><a href="{% url 'loginuser' %}"><button class="btn btn-primary btn-sm px-2 me-md-2 fw-bold mx-2">Login</button></a></li>
+          
+          {% endif %} 
+              <li class="nav-item btn-outline-secondary btn-sm px-2 mx-2">MattyA.co.uk</li>
               <li class="nav-item list-unstyled">
                 <a href="https://www.youtube.com/channel/UC-FZsYPlcdkAXedRyAVK_3A"><button type="button" class="btn btn-outline-secondary btn-sm px-2 mx-2">YouTube</button></a>
             </li>
             <li class="nav-item list-unstyled">
               <a href="https://www.instagram.com/matty314159/"><button type="button" class="btn btn-outline-secondary btn-sm px-2 mx-2">Instagram</button></a>
           </li>
+                   
 			  
 			  
 			</div>
@@ -27,6 +43,8 @@
 		</div>
 
 	  </nav>
+
+
     {% block content %}
     {% endblock %}
 </body>

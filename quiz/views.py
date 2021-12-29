@@ -2,6 +2,11 @@ from django.shortcuts import render, redirect
 from quiz.models import Room
 from .forms import RoomForm
 from django.core.exceptions import ValidationError
+from django.db import IntegrityError
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 import random
 import csv
 import io
@@ -33,6 +38,7 @@ def parseqs(csvf):
 def quiz(request):
     return render(request, 'quiz/home.html')
 
+@login_required
 def create(request):
     if request.method == 'GET':
         return render(request, 'quiz/create.html', {'form':RoomForm()})
