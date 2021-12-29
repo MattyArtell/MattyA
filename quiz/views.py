@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from quiz.models import Room
 from .forms import RoomForm
+from django.core.exceptions import ValidationError
 import random
+import csv
+import io
 
 # Create your views here.
 
@@ -17,9 +20,15 @@ def genid():
             continue
     return(roomid)
 
-def parseqs(csv):
+def parseqs(csvf):
     #Parse questions & answers from a csv file into a dictionary
-    print(csv.read())
+    mydict = {}
+    decoded_file = csvf.read().decode('utf-8')
+    io_string = io.StringIO(decoded_file)
+    #print(io_string)
+    for line in csv.reader(io_string):
+        mydict[line[0]] = line[1]
+    return mydict
 
 def quiz(request):
     return render(request, 'quiz/home.html')
@@ -29,14 +38,14 @@ def create(request):
         return render(request, 'quiz/create.html', {'form':RoomForm()})
     else:
         try:
-            roomform = RoomForm(request.POST)
+            roomform = RoomForm(request.POST, request.FILES)
             newroom = roomform.save(commit=False)
             roomid = genid()
             newroom.roomuid = roomid
             newroom.save()
             return redirect('../quiz/room/{}'.format(roomid)) # this is weird, without .. it does /quiz/quiz 
         except ValueError:
-            return render(request, 'quiz/create.html', {'form':RoomForm(), 'error':'value error'})
+            return render(request, 'quiz/create.html', {'form':RoomForm(), 'error':'Files must be .csv of no more than 1MB'})
     #return render(request, 'quiz/create.html', {'myid':roomid})
 
 def join(request):
@@ -58,12 +67,14 @@ def join(request):
         else: 
             return redirect('../quiz/room/{}'.format(uid))    
 
-def currentroom(request, uid=111):
+def currentroom(request, uid=0):
     if Room.objects.filter(roomuid = uid).exists():
         roomobj = Room.objects.get(roomuid = uid)
-        csv = roomobj.questions
-        parseqs(csv)
-        return render(request, 'quiz/currentroom.html', {'id':uid})
+        csvf = roomobj.questions
+#        print(csvf)
+        qdict = parseqs(csvf)
+        print(qdict)
+        return render(request, 'quiz/currentroom.html', {'id':uid, 'qdict':qdict})
     else:
         return render(request, 'quiz/home.html', {'error':'{} is not a valid room'.format(uid)})
     

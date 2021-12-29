@@ -1,4 +1,5 @@
 from django.db import models
+from .validators import validate_file_size
 
 # Create your models here.
 
@@ -13,7 +14,7 @@ class Room(models.Model):
     roomuid = models.CharField(max_length = 10, unique=True)
     public = models.BooleanField(default=True)
     password = models.CharField(max_length=30)
-    questions = models.FileField(upload_to='/media/', default='/static/files/default.csv')
+    questions = models.FileField(upload_to='MEDIA_ROOT/%Y/%m/%d/%S', default='/static/files/default.csv', validators = [validate_file_size])
     #need to verify file-type (with python-magic?)
 
 
