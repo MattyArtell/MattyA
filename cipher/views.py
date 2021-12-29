@@ -5,7 +5,6 @@ import random
 
 def ciphermap(adict, ptext): #given a dictionary which assigns each letter in the alphabet to another letter, returns the ciphertext
     ciphered=''
-    print(adict)
     for i in range(len(ptext)):
             if not (65<=ord(ptext[i])<=90):
                 ciphered+=ptext[i]
@@ -67,9 +66,8 @@ def result(request):
             key += alphabet[rletter]
             alphabet.pop(rletter)
         ciphered = ciphermap(adict,ptext)
-        key = str(key)
         rseed = str(rseed)
-        mapkey = 'The key is as follows:\n' + '\n' + key
+        mapkey = ''.join(key)
         return render(request, 'cipher/result.html', {'plaintext':ptext, 'ciphered':ciphered, 'mapkey':mapkey})
 
     if (ctype == 'smap'): # Maps each character to a user-specified character

@@ -3,8 +3,12 @@
 {% block content %}
 
 <h1>Join a room</h1>
-
-
+<h2 style='color:red'>{{ error }}</h2>
+<form method='POST'> {% csrf_token %}
+    <label>Enter room id:</label><input type="text" id="roomid" name="roomid">
+    <label>Enter room password:</label><input type="text" id="roompass" name="roompass">
+    <input type="submit" id="roomidsubmit" value="submit">
+</form>
 
 
 {% endblock %}

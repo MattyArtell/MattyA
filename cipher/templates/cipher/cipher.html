@@ -37,24 +37,29 @@
     }
 
     function validateForm() {
-    let keywordinjs = document.forms["cipherForm"]["keywordin"].value;
-    let typejs = document.forms["cipherForm"]["type"].value;
-    let maptextjs = document.forms["cipherForm"]["maptext"].value;
-    let alphabetjs = document.forms["cipherForm"]["alphabet"].value;
-    if (keywordinjs == "" && typejs == "keyword") {
+    let keywordin = document.forms["cipherForm"]["keywordin"].value;
+    let type = document.forms["cipherForm"]["type"].value;
+    let maptext = document.forms["cipherForm"]["maptext"].value;
+    let alphabet = document.forms["cipherForm"]["alphabet"].value;
+    let shiftby = document.forms["cipherForm"]["shiftby"].value;
+    if (keywordin == "" && type == "keyword") {
         alert("Keyword cannot be blank");
         return false;
     }
-    if (keywordinjs == "" && typejs == "vigenere") {
+    if (keywordin == "" && type == "vigenere") {
         alert("Keyword cannot be blank");
         return false;
     }
-    if (typejs == "smap" && maptextjs.length == 0 || alphabetjs.length == 0) {
+    if (type == "smap" && maptext.length == 0 || alphabet.length == 0) {
         alert("Map and/or alphabet cannot be blank");
         return false;
     }
-    if (typejs == "smap" && maptextjs.length != alphabetjs.length) {
+    if (type == "smap" && maptext.length != alphabet.length) {
         alert("Map must be the same length as alphabet");
+        return false;
+    }
+    if (type == "shift" && shiftby == "") {
+        alert("Shiftby cannot be blank");
         return false;
     }  
 }     
